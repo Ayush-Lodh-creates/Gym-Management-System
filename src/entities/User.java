@@ -42,4 +42,8 @@ public class User {
     public void setPhone(Long phone) {
         this.phone = phone;
     }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
 }

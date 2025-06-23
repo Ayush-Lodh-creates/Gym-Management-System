@@ -4,6 +4,7 @@ import entities.Center;
 import entities.Slot;
 import entities.Workout;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -38,6 +39,14 @@ public class CenterService {
         return centers.get(id);
     }
 
+    public List<Center> getAllCenters() {
+        List<Center> centerList = new ArrayList<>();
+        for(Map.Entry<String, Center> entry : centers.entrySet()) {
+            centerList.add(entry.getValue());
+        }
+        return centerList;
+    }
+
     public void addWorkouts(String centerId, List<Workout> workouts) throws Exception {
         Center center = getCenterDetails(centerId);
         center.setWorkouts(workouts);
@@ -57,6 +66,11 @@ public class CenterService {
         return workouts.get(id);
     }
 
+    public List<Workout> getAllWorkoutsForCenter(String centerId) throws Exception {
+        Center center = getCenterDetails(centerId);
+        return center.getWorkouts();
+    }
+
     public void addSlotsToWorkout(String workoutId, List<Slot> slots) throws Exception {
         Workout workout = getWorkoutDetails(workoutId);
         workout.setSlots(slots);
@@ -74,6 +88,11 @@ public class CenterService {
             throw new Exception("This slot does not exist");
         }
         return slots.get(id);
+    }
+
+    public List<Slot> getAllSlotsForWorkout(String workoutId) {
+        Workout workout = workouts.get(workoutId);
+        return workout.getSlots();
     }
 
 }
